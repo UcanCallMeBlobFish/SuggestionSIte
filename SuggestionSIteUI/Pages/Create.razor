@@ -1,0 +1,90 @@
+@page "/Create"
+@using SuggestionSIteUI.Components
+@using SuggestionSIteUI.Models
+@inject ISuggestionData suggestionData
+@inject IUserData userData 
+@inject NavigationManager navManager 
+@inject ICategoryData CategoryData 
+
+<h1>Make A Suggestion</h1>
+<div>
+    <div>
+        <div>
+            <button @onclick="ClosePage"></button>
+        </div>
+        @if (categories is not null)
+        {
+            <EditForm Model="suggestion" OnValidSubmit="CreateSuggestion">
+                <DataAnnotationsValidator/>
+                <ValidationSummary/>
+                <div class="input-section">
+                    <label class="form-label fw-bold text-uppercase" for="suggestion-text">Suggestion</label>
+                    <div class="input-description">Focus on the topic or technology you want to learn about.</div>
+                    <InputText class="form-control" id="suggestion-text" @bind-Value="suggestion.Suggestion"/>
+                </div>
+                <div>
+                    <label class="form-label fw-bold text-uppercase" for="category">Category</label>
+                    <div class="input-description">Choose One Category.</div>
+                    <div class="col-lg-8">
+                        <MyInputRadioGroup id="category" @bind-Value="suggestion.CategoryId">
+                            @foreach (var c in categories)
+                            {
+                                <div class="radio-item-group">
+                                    <InputRadio Value="@c.CategoryId" id="@c.CategoryId"/>
+                                    <label for="@c.CategoryId">@c.CategoryName - @c.CategoryDescription</label>
+                                </div>
+                            }
+                        </MyInputRadioGroup>
+                    </div>
+                </div>
+                <div class="input-section">
+                    <label class="form-label fw-bold text-uppercase" for="description">Description</label>
+                    <div class="input-description">Briefly describe your suggestion.</div>
+                    <InputTextArea class="form-control" id="description" @bind-Value="suggestion.Description"/>
+                </div>
+                <div class="center-children">
+                    <button class="btn btn-main btn-lg text-uppercase"type="submit">Suggest</button>
+                </div>
+            </EditForm>
+        }
+    </div>
+</div>
+
+@code {
+    private CreateSuggestionModel suggestion = new();
+    private List<CategoryModel> categories;
+    private UserModel loggedInUser;
+
+    protected async override Task OnInitializedAsync()
+    {
+        categories = await CategoryData.GetAllCategories();
+
+    //todo
+        loggedInUser = await userData.GetUserFromAuthentication("abc-123");
+    }
+
+    private void ClosePage()
+    {
+        navManager.NavigateTo("/");
+    }
+
+    private async Task CreateSuggestion()
+    {
+        SuggestionModel s = new();
+        s.Suggestion = suggestion.Suggestion;
+        s.Description = suggestion.Description;
+        s.Author = new BasicUserModel(loggedInUser);
+        s.Category = categories.Where(c => c.CategoryId == suggestion.CategoryId).FirstOrDefault();
+
+        if (s.Category is null)
+        {
+            suggestion.CategoryId = "";
+            return;
+        }
+        await suggestionData.CreateSuggestions(s);
+        suggestion = new();
+        ClosePage();
+    }
+
+
+}

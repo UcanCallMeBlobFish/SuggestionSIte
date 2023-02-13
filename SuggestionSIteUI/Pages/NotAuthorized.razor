@@ -1,0 +1,21 @@
+@page "/NotAuthorized"
+@inject NavigationManager navManager 
+
+<div>
+    <div>
+        <div>
+            <div> Authorized Required</div>
+            <p>U are not authorized to access this section, you need to be logged in to vote,submit etc.</p>
+            
+        </div>
+        <div @onclick="ClosePage"></div>
+    </div>
+</div>
+
+@code {
+
+    private void ClosePage()
+    {
+        navManager.NavigateTo("/");
+    }
+}

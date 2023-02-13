@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuggestionSIteUI", "SuggestionSIteUI\SuggestionSIteUI.csproj", "{FE102B06-3C2A-4640-936B-F9AFAF4CAA6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuggestionSiteBack", "SuggestionSiteBack\SuggestionSiteBack.csproj", "{DAD7349C-78DD-48FA-A800-31FC3F820FF5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE102B06-3C2A-4640-936B-F9AFAF4CAA6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE102B06-3C2A-4640-936B-F9AFAF4CAA6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE102B06-3C2A-4640-936B-F9AFAF4CAA6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE102B06-3C2A-4640-936B-F9AFAF4CAA6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAD7349C-78DD-48FA-A800-31FC3F820FF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAD7349C-78DD-48FA-A800-31FC3F820FF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAD7349C-78DD-48FA-A800-31FC3F820FF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAD7349C-78DD-48FA-A800-31FC3F820FF5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
